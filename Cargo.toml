@@ -1,0 +1,7 @@
+[package]
+name = "gazebo-playground"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+gazebo = "0.4.1"
