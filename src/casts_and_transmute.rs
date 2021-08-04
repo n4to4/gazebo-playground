@@ -23,6 +23,26 @@ mod tests {
         assert_all_ones(&y);
     }
 
+    #[test]
+    fn ptr_usize() {
+        let s = String::from("foo");
+        let ptr = &s;
+
+        let usz = gazebo::cast::ptr_to_usize(ptr);
+        let ptr: &String = unsafe { gazebo::cast::usize_to_ptr(usz) };
+
+        assert_eq!(&s, ptr);
+        assert_eq!(s, *ptr);
+    }
+
+    #[test]
+    fn cast_string() {
+        let s = String::from("あいう");
+        let v: &Vec<u8> = unsafe { gazebo::cast::ptr(&s) };
+
+        assert_eq!(&s as *const String as usize, v as *const Vec<u8> as usize);
+    }
+
     // utilities
 
     fn assert_all_ones(bytes: &[u8; 8]) {
